@@ -17,6 +17,19 @@ while len(correct_guesses) < 50:
 
     answer_state = screen.textinput(title=f"{len(correct_guesses)}/50 Guess a State", prompt="What is another state?").title()
 
+    if answer_state == "Exit":
+        # states_to_learn.csv
+        states_not_guessed = []
+        for state in all_states:
+            if state not in correct_guesses:
+                states_not_guessed.append(state)
+
+        states_df = pandas.DataFrame({
+            "state": states_not_guessed
+        })
+        states_df.to_csv("states_to_learn.csv")
+        break
+
     if answer_state in all_states:
         correct_guesses.append(answer_state)
         new_state = turtle.Turtle()
@@ -29,6 +42,8 @@ while len(correct_guesses) < 50:
         new_state.goto(state_coord)
         new_state.write(answer_state, font=("Arial", 8, "normal"))
         my_screen_writes.append(new_state)
+
+
 
 
 turtle.mainloop()
