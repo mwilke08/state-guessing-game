@@ -19,11 +19,7 @@ while len(correct_guesses) < 50:
 
     if answer_state == "Exit":
         # states_to_learn.csv
-        states_not_guessed = []
-        for state in all_states:
-            if state not in correct_guesses:
-                states_not_guessed.append(state)
-
+        states_not_guessed = [state for state in all_states if state not in correct_guesses]
         states_df = pandas.DataFrame({
             "state": states_not_guessed
         })
